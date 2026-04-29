@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>가맹/창업 문의 - Miu도넛</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--orange) 100%);
+    color: white;
+    padding: 100px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero h1 {
+    font-family: 'Jua', sans-serif;
+    font-size: 72px;
+    margin-bottom: 16px;
+    letter-spacing: -2px;
+    line-height: 1.1;
+  }
+  .page-hero p {
+    font-size: 22px;
+    opacity: 0.95;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  /* WHY SECTION */
+  .why {
+    background: white;
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 50px;
+  }
+  .why-card {
+    text-align: center;
+    padding: 40px 24px;
+    background: var(--cream);
+    border-radius: 24px;
+    transition: all 0.3s;
+  }
+  .why-card:hover {
+    transform: translateY(-8px);
+    background: white;
+    box-shadow: var(--shadow);
+  }
+  .why-num {
+    font-family: 'Jua', sans-serif;
+    font-size: 64px;
+    color: var(--pink);
+    line-height: 1;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--pink), var(--orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .why-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .why-card p {
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* PROCESS */
+  .process {
+    background: var(--cream);
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 50px;
+    position: relative;
+  }
+  .process-step {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 16px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .process-step:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+  }
+  .step-num {
+    width: 50px;
+    height: 50px;
+    background: var(--pink);
+    color: white;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Jua', sans-serif;
+    font-size: 24px;
+  }
+  .process-step:nth-child(2) .step-num { background: var(--yellow); color: var(--dark); }
+  .process-step:nth-child(3) .step-num { background: var(--mint); }
+  .process-step:nth-child(4) .step-num { background: var(--sky); }
+  .process-step:nth-child(5) .step-num { background: var(--orange); }
+  .process-step h4 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .process-step p {
+    color: var(--gray);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* COST TABLE */
+  .cost {
+    background: white;
+  }
+  .cost-table-wrap {
+    margin-top: 40px;
+    background: var(--cream);
+    border-radius: 24px;
+    padding: 40px;
+    overflow-x: auto;
+  }
+  .cost-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .cost-table th, .cost-table td {
+    padding: 18px 16px;
+    text-align: left;
+  }
+  .cost-table thead {
+    background: var(--pink);
+    color: white;
+  }
+  .cost-table thead th {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .cost-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .cost-table tbody tr:last-child {
+    border-bottom: none;
+    background: var(--pink-light);
+  }
+  .cost-table tbody td {
+    font-size: 15px;
+  }
+  .cost-table tbody td:first-child {
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .cost-table tbody td:last-child {
+    text-align: right;
+    color: var(--pink-dark);
+    font-weight: 700;
+  }
+  .cost-note {
+    margin-top: 20px;
+    color: var(--gray);
+    font-size: 13px;
+    text-align: center;
+  }
+
+  /* FAQ */
+  .faq {
+    background: var(--cream);
+  }
+  .faq-list {
+    max-width: 900px;
+    margin: 50px auto 0;
+  }
+  .faq-item {
+    background: white;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .faq-q {
+    padding: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 17px;
+  }
+  .faq-q::before {
+    content: 'Q';
+    background: var(--pink);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    font-family: 'Jua', sans-serif;
+    flex-shrink: 0;
+  }
+  .faq-q-text {
+    flex: 1;
+  }
+  .faq-q::after {
+    content: '+';
+    font-size: 28px;
+    color: var(--pink);
+    font-weight: 400;
+    transition: transform 0.3s;
+  }
+  .faq-item.open .faq-q::after {
+    transform: rotate(45deg);
+  }
+  .faq-a {
+    padding: 0 24px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+  .faq-item.open .faq-a {
+    padding: 0 24px 24px 72px;
+    max-height: 200px;
+  }
+
+  /* CONTACT FORM */
+  .contact {
+    background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%);
+    color: white;
+  }
+  .contact .section-title {
+    color: white;
+  }
+  .contact .section-subtitle {
+    color: #aaa;
+  }
+  .form-wrap {
+    max-width: 700px;
+    margin: 50px auto 0;
+    background: white;
+    color: var(--dark);
+    padding: 50px;
+    border-radius: 24px;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-group label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+  .form-group label .required {
+    color: var(--pink);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid var(--light-gray);
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--pink);
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--pink);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 12px;
+  }
+  .form-submit:hover {
+    background: var(--pink-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+  .agree {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gray);
+    font-size: 14px;
+    margin-top: 16px;
+  }
+  .agree input { width: auto; }
+
+  @media (max-width: 768px) {
+    .page-hero h1 { font-size: 42px; }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-grid { grid-template-columns: repeat(2, 1fr); }
+    .cost-table-wrap { padding: 20px; }
+    .form-wrap { padding: 30px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <span class="logo-icon"></span>
+      Miu도넛
+    </a>
+    <button class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
+    <nav>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="brand.html">브랜드</a></li>
+        <li><a href="menu.html">메뉴</a></li>
+        <li><a href="stores.html">매장안내</a></li>
+        <li><a href="franchise.html" class="cta-btn active">가맹문의</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="hero-tag">FRANCHISE</span>
+    <h1>달콤한 사업,<br>Miu도넛과 함께</h1>
+    <p>전국 120여 개 매장이 증명하는 성공 노하우</p>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="container">
+    <span class="section-tag" style="display: block; text-align: center; margin: 0 auto 16px; width: fit-content;">WHY MIU</span>
+    <h2 class="section-title">Miu도넛을 선택하는 이유</h2>
+    <p class="section-subtitle">검증된 시스템과 든든한 본사 지원</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <h3>검증된 브랜드 파워</h3>
+        <p>전국 120개 매장 운영 노하우와 높은 고객 충성도</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <h3>차별화된 메뉴</h3>
+        <p>꾸준한 신메뉴 개발과 시그니처 도넛으로 경쟁력 확보</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <h3>체계적인 교육</h3>
+        <p>오픈 전 2주 집중 교육 + 오픈 후 정기 컨설팅</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">04</div>
+        <h3>본사 마케팅 지원</h3>
+        <p>SNS 마케팅, 신상품 프로모션 본사 직접 지원</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="container">
+    <span class="section-tag" style="display: block; text-align: center; margin: 0 auto 16px; width: fit-content;">PROCESS</span>
+    <h2 class="section-title">창업 진행 절차</h2>
+    <p class="section-subtitle">상담 신청부터 오픈까지 약 8주</p>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <h4>창업 상담</h4>
+        <p>온라인 문의 또는 본사 방문 상담</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h4>입지 분석</h4>
+        <p>전문가의 상권 및 입지 검토</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h4>계약 체결</h4>
+        <p>정보공개서 검토 후 가맹 계약</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <h4>인테리어<br>& 교육</h4>
+        <p>매장 시공 및 운영 교육</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">5</div>
+        <h4>매장 오픈</h4>
+        <p>그랜드 오픈 및 사후 관리</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COST -->
+<section class="cost">
+  <div class="container">
+    <span class="section-tag" style="display: block; text-align: center; margin: 0 auto 16px; width: fit-content;">COST</span>
+    <h2 class="section-title">창업 비용 안내</h2>
+    <p class="section-subtitle">기준: 33㎡(10평) 매장</p>
+    <div class="cost-table-wrap">
+      <table class="cost-table">
+        <thead>
+          <tr>
+            <th>항목</th>
+            <th>내용</th>
+            <th>금액</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>가맹비</td>
+            <td>브랜드 사용 권리, 영업권</td>
+            <td>10,000,000원</td>
+          </tr>
+          <tr>
+            <td>교육비</td>
+            <td>본사 2주 운영 교육</td>
+            <td>3,000,000원</td>
+          </tr>
+          <tr>
+            <td>인테리어</td>
+            <td>매장 인테리어 (33㎡ 기준)</td>
+            <td>35,000,000원</td>
+          </tr>
+          <tr>
+            <td>주방기기</td>
+            <td>도넛 제조 설비, 카페 기기</td>
+            <td>22,000,000원</td>
+          </tr>
+          <tr>
+            <td>초도물품</td>
+            <td>오픈 시 필요한 재료 및 부자재</td>
+            <td>5,000,000원</td>
+          </tr>
+          <tr>
+            <td><strong>합계</strong></td>
+            <td>(보증금, 임대료 별도)</td>
+            <td><strong>약 75,000,000원</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cost-note">* 매장 평수 및 입지 조건에 따라 비용이 달라질 수 있습니다.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <span class="section-tag" style="display: block; text-align: center; margin: 0 auto 16px; width: fit-content;">FAQ</span>
+    <h2 class="section-title">자주 묻는 질문</h2>
+    <p class="section-subtitle">창업 전 궁금한 점을 확인해보세요</p>
+    <div class="faq-list">
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q"><span class="faq-q-text">창업 비용은 얼마나 필요한가요?</span></div>
+        <div class="faq-a">매장 평수와 입지 조건에 따라 다르지만, 33㎡(10평) 기준 약 7,500만 원 정도가 필요합니다 (보증금/임대료 별도). 자세한 내용은 본사 상담을 통해 안내해드립니다.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q"><span class="faq-q-text">상담 신청 후 오픈까지 얼마나 걸리나요?</span></div>
+        <div class="faq-a">상담 신청부터 매장 오픈까지 평균 8주 정도가 소요됩니다. 입지 선정과 인테리어 일정에 따라 일부 조정될 수 있습니다.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q"><span class="faq-q-text">베이커리 경험이 없어도 가능한가요?</span></div>
+        <div class="faq-a">네, 가능합니다. 본사에서 2주간의 집중 교육을 통해 도넛 제조부터 매장 운영, 고객 응대까지 전반적인 노하우를 전수해드립니다.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q"><span class="faq-q-text">본사의 지속적인 지원이 있나요?</span></div>
+        <div class="faq-a">매장 오픈 후에도 정기 슈퍼바이저 방문, 신메뉴 교육, 마케팅 지원 등 다양한 사후 관리를 통해 점주님의 안정적인 매장 운영을 돕습니다.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q"><span class="faq-q-text">최소 매장 평수 기준이 있나요?</span></div>
+        <div class="faq-a">최소 23㎡(7평) 이상의 매장을 권장하며, 매장 컨셉에 따라 테이크아웃 전문점, 카페형 매장으로 다양하게 구성 가능합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <div class="container">
+    <span class="section-tag" style="display: block; text-align: center; margin: 0 auto 16px; width: fit-content; background: var(--yellow); color: var(--dark);">CONTACT</span>
+    <h2 class="section-title">창업 상담 신청</h2>
+    <p class="section-subtitle">남겨주신 정보로 담당자가 신속하게 연락드립니다</p>
+    <div class="form-wrap">
+      <form onsubmit="event.preventDefault(); alert('상담 신청이 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.'); this.reset();">
+        <div class="form-row">
+          <div class="form-group">
+            <label>성함 <span class="required">*</span></label>
+            <input type="text" required placeholder="홍길동">
+          </div>
+          <div class="form-group">
+            <label>연락처 <span class="required">*</span></label>
+            <input type="tel" required placeholder="010-1234-5678">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>이메일</label>
+            <input type="email" placeholder="example@email.com">
+          </div>
+          <div class="form-group">
+            <label>희망 지역 <span class="required">*</span></label>
+            <select required>
+              <option value="">선택해주세요</option>
+              <option>서울</option>
+              <option>경기/인천</option>
+              <option>부산/경남</option>
+              <option>대구/경북</option>
+              <option>대전/충청</option>
+              <option>광주/전라</option>
+              <option>강원/제주</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>창업 예산</label>
+          <select>
+            <option value="">선택해주세요</option>
+            <option>5천만 원 미만</option>
+            <option>5천만 원 ~ 1억 원</option>
+            <option>1억 원 ~ 2억 원</option>
+            <option>2억 원 이상</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>문의 내용</label>
+          <textarea placeholder="궁금하신 점을 자유롭게 적어주세요"></textarea>
+        </div>
+        <div class="agree">
+          <input type="checkbox" id="agree" required>
+          <label for="agree">개인정보 수집 및 이용에 동의합니다 (필수)</label>
+        </div>
+        <a href="https://open.kakao.com/o/s1cBHAsi" class="form-submit" style="display: block; text-align: center; text-decoration: none;">💬 카카오톡으로 상담 신청하기</a>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h3>Miu도넛</h3>
+      <p>매일 만들어 더 신선하게,<br>달콤한 행복을 한 입에 전합니다.</p>
+      <div class="social-icons">
+        <a href="#">IG</a>
+        <a href="#">FB</a>
+        <a href="#">YT</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="brand.html">브랜드 소개</a></li>
+        <li><a href="menu.html">메뉴</a></li>
+        <li><a href="stores.html">매장 안내</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>창업안내</h4>
+      <ul>
+        <li><a href="franchise.html">가맹 절차</a></li>
+        <li><a href="franchise.html">창업 비용</a></li>
+        <li><a href="franchise.html">개설 문의</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>고객센터</h4>
+      <ul>
+        <li>1588-0000</li>
+        <li>평일 09:00 - 18:00</li>
+        <li>contact@miudonut.kr</li>
+      </ul>
+    </div>
+  </div>
+  <div clas

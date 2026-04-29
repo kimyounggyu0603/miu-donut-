@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miu도넛 - 달콤한 행복을 한 입에</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #FFE5EC 0%, #FFF8F0 50%, #FFEFD5 100%);
+    padding: 120px 24px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-text h1 {
+    font-family: 'Jua', sans-serif;
+    font-size: 72px;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+  }
+  .hero-text h1 .highlight {
+    color: var(--pink);
+    position: relative;
+    display: inline-block;
+  }
+  .hero-text h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    height: 12px;
+    background: var(--yellow);
+    z-index: -1;
+    border-radius: 6px;
+  }
+  .hero-text p {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .hero-visual {
+    position: relative;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-img {
+    width: 100%;
+    max-width: 500px;
+    height: 480px;
+    border-radius: 32px;
+    background-image: url('images/hero-box.jpg'), linear-gradient(135deg, #FFC0D9, var(--pink));
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 30px 60px rgba(255, 61, 127, 0.25);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* ===== BEST MENU ===== */
+  .best-menu {
+    background: white;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .menu-card {
+    background: var(--cream);
+    border-radius: 24px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 3px solid transparent;
+  }
+  .menu-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--pink);
+    box-shadow: var(--shadow);
+  }
+  .menu-card-img {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  .menu-1 { background-image: url('images/donut-strawberry.jpg'), radial-gradient(circle at 30% 30%, #FFC0D9, var(--pink)); }
+  .menu-2 { background-image: url('images/donut-lemon.jpg'), radial-gradient(circle at 30% 30%, #FFEC8B, var(--yellow)); }
+  .menu-3 { background-image: url('images/donut-choco.jpg'), radial-gradient(circle at 30% 30%, #C2B280, #8B4513); }
+  .menu-4 { background-image: url('images/donut-matcha.jpg'), radial-gradient(circle at 30% 30%, #B5EAD7, var(--mint)); }
+  .menu-card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+  .menu-card p {
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .menu-price {
+    font-weight: 900;
+    color: var(--pink);
+    font-size: 18px;
+  }
+  .menu-badge {
+    display: inline-block;
+    background: var(--pink);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  /* ===== STORY ===== */
+  .story {
+    background: linear-gradient(135deg, var(--pink-light) 0%, #FFE5EC 100%);
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .story-visual {
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .story-img {
+    width: 100%;
+    max-width: 420px;
+    height: 420px;
+    background-image: url('images/hero-plate.jpg'), radial-gradient(circle at 30% 30%, #FFC0D9, var(--pink-dark));
+    background-size: cover;
+    background-position: center;
+    border-radius: 32px;
+    box-shadow: 0 30px 60px rgba(255, 61, 127, 0.3);
+  }
+  .story-text h2 {
+    font-family: 'Jua', sans-serif;
+    font-size: 56px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+  .story-text p {
+    font-size: 17px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  /* ===== STATS ===== */
+  .stats {
+    background: var(--dark);
+    color: white;
+    padding: 60px 24px;
+  }
+  .stats-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Jua', sans-serif;
+    font-size: 64px;
+    color: var(--yellow);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 16px;
+    color: #ccc;
+  }
+
+  /* ===== STORE ===== */
+  .stores-preview {
+    background: var(--cream);
+  }
+  .stores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .store-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    transition: all 0.3s;
+  }
+  .store-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+  }
+  .store-img {
+    height: 200px;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--orange) 100%);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px 20px;
+    color: white;
+    font-family: 'Jua', sans-serif;
+    font-size: 28px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .store-info {
+    padding: 24px;
+  }
+  .store-info h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .store-info p {
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .store-info p strong {
+    color: var(--dark);
+  }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--orange) 100%);
+    color: white;
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Jua', sans-serif;
+    font-size: 56px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+  }
+  .cta-section p {
+    font-size: 20px;
+    margin-bottom: 32px;
+    opacity: 0.95;
+  }
+  .cta-section .btn-secondary {
+    font-size: 18px;
+    padding: 18px 40px;
+  }
+
+  @media (max-width: 768px) {
+    .hero-container { grid-template-columns: 1fr; }
+    .hero-text h1 { font-size: 48px; }
+    .hero-visual { height: 300px; }
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    .story-grid { grid-template-columns: 1fr; }
+    .story-text h2 { font-size: 40px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-num { font-size: 48px; }
+    .stores-grid { grid-template-columns: 1fr; }
+    .cta-section h2 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <span class="logo-icon"></span>
+      Miu도넛
+    </a>
+    <button class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">홈</a></li>
+        <li><a href="brand.html">브랜드</a></li>
+        <li><a href="menu.html">메뉴</a></li>
+        <li><a href="stores.html">매장안내</a></li>
+        <li><a href="franchise.html" class="cta-btn">가맹문의</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-text">
+      <span class="section-tag">달콤한 한 입의 행복</span>
+      <h1>매일 만들어<br>더 <span class="highlight">신선하게</span><br>더 달콤하게</h1>
+      <p>매장에서 직접 반죽하고 튀겨 만드는<br>수제 프리미엄 도넛, Miu도넛이 함께합니다.</p>
+      <div class="hero-buttons">
+        <a href="menu.html" class="btn btn-primary">메뉴 보러가기</a>
+        <a href="https://open.kakao.com/o/s1cBHAsi" class="btn btn-outline">창업 상담</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BEST MENU -->
+<section class="best-menu">
+  <div class="container">
+    <span class="section-tag" style="display: block; text-align: center; margin: 0 auto 16px; width: fit-content;">BEST MENU</span>
+    <h2 class="section-title">이번 주 인기 메뉴</h2>
+    <p class="section-subtitle">Miu도넛에서 가장 사랑받는 베스트 도넛을 만나보세요</p>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card-img menu-1"></div>
+        <span class="menu-badge">BEST</span>
+        <h3>스트로베리 글레이즈</h3>
+        <p>달콤한 딸기 글레이즈에 부드러운 도넛</p>
+        <div class="menu-price">3,800원</div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-img menu-2"></div>
+        <span class="menu-badge" style="background: var(--yellow); color: var(--dark);">NEW</span>
+        <h3>레몬 슈가</h3>
+        <p>상큼한 레몬 슈가가 입안 가득</p>
+        <div class="menu-price">3,500원</div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-img menu-3"></div>
+        <span class="menu-badge" style="background: var(--orange);">HOT</span>
+        <h3>다크 초코 글레이즈</h3>
+        <p>진한 다크 초콜릿의 깊은 풍미</p>
+        <div class="menu-price">4,200원</div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-img menu-4"></div>
+        <span class="menu-badge" style="background: var(--mint);">SIGNATURE</span>
+        <h3>말차 글레이즈</h3>
+        <p>우지말차의 고소하고 깊은 맛</p>
+        <div class="menu-price">4,500원</div>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 50px;">
+      <a href="menu.html" class="btn btn-primary">전체 메뉴 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-visual">
+        <div class="story-img"></div>
+      </div>
+      <div class="story-text">
+        <span class="section-tag">BRAND STORY</span>
+        <h2>매일의 작은<br>행복을 굽다</h2>
+        <p>Miu도넛은 매일 아침 매장에서 직접 반죽을 만들어 튀깁니다. 인공 첨가물을 최소화하고, 엄선된 재료만을 사용하여 누구나 안심하고 즐길 수 있는 도넛을 만들어요.</p>
+        <p>한 입 베어 무는 순간, 입안 가득 퍼지는 부드러움. 그게 바로 Miu도넛이 추구하는 "행복의 맛"입니다.</p>
+        <a href="brand.html" class="btn btn-primary" style="margin-top: 16px;">브랜드 이야기 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num">120+</div>
+      <div class="stat-label">전국 가맹점</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">35</div>
+      <div class="stat-label">시그니처 메뉴</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">98%</div>
+      <div class="stat-label">고객 만족도</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2018</div>
+      <div class="stat-label">설립 연도</div>
+    </div>
+  </div>
+</section>
+
+<!-- STORES -->
+<section class="stores-preview">
+  <div class="container">
+    <span class="section-tag" style="display: block; text-align: center; margin: 0 auto 16px; width: fit-content;">STORES</span>
+    <h2 class="section-title">전국 어디서나 Miu</h2>
+    <p class="section-subtitle">가까운 Miu도넛 매장에서 만나보세요</p>
+    <div class="stores-grid">
+      <div class="store-card">
+        <div class="store-img" style="background-image: url('images/store-gangnam.jpg'), linear-gradient(135deg, var(--pink), var(--orange));">강남점</div>
+        <div class="store-info">
+          <h3>Miu도넛 강남점</h3>
+          <p><strong>주소</strong> 서울시 강남구 강남대로 123</p>
+          <p><strong>영업시간</strong> 매일 09:00 - 22:00</p>
+          <p><strong>전화</strong> 02-1234-5678</p>
+        </div>
+      </div>
+      <div class="store-card">
+        <div class="store-img" style="background-image: url('images/store-hongdae.jpg'), linear-gradient(135deg, var(--mint), var(--sky));">홍대점</div>
+        <div class="store-info">
+          <h3>Miu도넛 홍대점</h3>
+          <p><strong>주소</strong> 서울시 마포구 양화로 88</p>
+          <p><strong>영업시간</strong> 매일 10:00 - 23:00</p>
+          <p><strong>전화</strong> 02-2345-6789</p>
+        </div>
+      </div>
+      <div class="store-card">
+        <div class="store-img" style="background-image: url('images/store-pangyo.jpg'), linear-gradient(135deg, var(--yellow), var(--orange));">성수점</div>
+        <div class="store-info">
+          <h3>Miu도넛 성수점</h3>
+          <p><strong>주소</strong> 서울시 성동구 성수이로 45</p>
+          <p><strong>영업시간</strong> 매일 09:30 - 22:00</p>
+          <p><strong>전화</strong> 02-3456-7890</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 50px;">
+      <a href="stores.html" class="btn btn-outline">전체 매장 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>당신의 도시에<br>Miu도넛을 함께 열어요</h2>
+    <p>달콤한 사업, Miu도넛 가맹점 모집 중</p>
+    <a href="https://open.kakao.com/o/s1cBHAsi" class="btn btn-secondary">창업 상담 신청 →</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h3>Miu도넛</h3>
+      <p>매일 만들어 더 신선하게,<br>달콤한 행복을 한 입에 전합니다.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="YouTube">YT</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="brand.html">브랜드 소개</a></li>
+        <li><a href="menu.html">메뉴</a></li>
+        <li><a href="stores.html">매장 안내</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>창업안내</h4>
+      <ul>
+        <li><a href="franchise.html">가맹 절차</a></li>
+        <li><a href="franchise.html">창업 비용</a></li>
+        <li><a href="franchise.html">개설 문의</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>고객센터</h4>
+      <ul>
+        <li>1588-0000</li>
+        <li>평일 09:00 - 18:00</li>
+        <li>contact@miudonut.kr</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Miu도넛 Co., Ltd. All Rights Reserved

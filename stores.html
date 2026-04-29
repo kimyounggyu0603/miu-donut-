@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>매장 안내 - Miu도넛</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .page-hero {
+    background:
+      linear-gradient(135deg, rgba(181, 234, 215, 0.85) 0%, rgba(255, 248, 240, 0.92) 100%),
+      url('images/store-pangyo.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 24px 80px;
+    text-align: center;
+    position: relative;
+  }
+  .page-hero h1 {
+    font-family: 'Jua', sans-serif;
+    font-size: 64px;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .page-hero p {
+    font-size: 20px;
+    color: #555;
+  }
+
+  /* SEARCH BAR */
+  .search-section {
+    background: white;
+    padding: 30px 24px;
+    border-bottom: 2px solid var(--light-gray);
+  }
+  .search-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+  }
+  .search-input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 2px solid var(--light-gray);
+    border-radius: 30px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus {
+    border-color: var(--pink);
+  }
+  .region-filter {
+    padding: 14px 20px;
+    border: 2px solid var(--light-gray);
+    border-radius: 30px;
+    font-size: 15px;
+    outline: none;
+    background: white;
+    cursor: pointer;
+  }
+
+  /* STORES GRID */
+  .stores-section {
+    background: var(--cream);
+    padding: 60px 24px;
+  }
+  .stores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .store-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .store-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+  }
+  .store-img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px 20px;
+    color: white;
+    font-family: 'Jua', sans-serif;
+    font-size: 28px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+  }
+  .store-info {
+    padding: 24px;
+  }
+  .store-info h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .store-tag {
+    background: var(--pink-light);
+    color: var(--pink-dark);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .store-tag.new { background: #C8E6C9; color: #2E7D32; }
+  .store-info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .store-info-row strong {
+    color: var(--dark);
+    min-width: 60px;
+    font-weight: 700;
+  }
+
+  /* 4장의 매장 사진을 랜덤 매핑 + 9가지 컬러 오버레이로 차별화 */
+  /* gradient 오버레이가 위, 사진이 아래로 합성 */
+  .img-c1 { background-image: linear-gradient(135deg, rgba(255,61,127,0.55), rgba(255,159,69,0.45)), url('images/store-gangnam.jpg'); }      /* 핑크 → 오렌지 */
+  .img-c2 { background-image: linear-gradient(135deg, rgba(107,203,119,0.55), rgba(77,150,255,0.45)), url('images/store-hongdae.jpg'); }    /* 민트 → 스카이 */
+  .img-c3 { background-image: linear-gradient(135deg, rgba(255,217,61,0.55), rgba(255,159,69,0.5)), url('images/store-pangyo.jpg'); }       /* 옐로우 → 오렌지 */
+  .img-c4 { background-image: linear-gradient(135deg, rgba(156,39,176,0.5), rgba(255,61,127,0.45)), url('images/store-haeundae.jpg'); }     /* 퍼플 → 핑크 */
+  .img-c5 { background-image: linear-gradient(135deg, rgba(77,150,255,0.55), rgba(92,107,192,0.5)), url('images/store-gangnam.jpg'); }      /* 블루 → 인디고 */
+  .img-c6 { background-image: linear-gradient(135deg, rgba(107,203,119,0.55), rgba(255,217,61,0.45)), url('images/store-pangyo.jpg'); }     /* 민트 → 옐로우 */
+  .img-c7 { background-image: linear-gradient(135deg, rgba(255,159,69,0.55), rgba(255,61,127,0.5)), url('images/store-hongdae.jpg'); }      /* 오렌지 → 핑크 */
+  .img-c8 { background-image: linear-gradient(135deg, rgba(0,188,212,0.5), rgba(107,203,119,0.5)), url('images/store-haeundae.jpg'); }      /* 시안 → 민트 */
+  .img-c9 { background-image: linear-gradient(135deg, rgba(255,61,127,0.5), rgba(156,39,176,0.45)), url('images/store-pangyo.jpg'); }       /* 핫핑크 → 퍼플 */
+
+  /* MAP CTA */
+  .map-cta {
+    background: var(--dark);
+    color: white;
+    padding: 60px 24px;
+    text-align: center;
+  }
+  .map-cta h3 {
+    font-family: 'Jua', sans-serif;
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+  .map-cta p {
+    color: #ccc;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .page-hero h1 { font-size: 42px; }
+    .stores-grid { grid-template-columns: 1fr; }
+    .search-container { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <span class="logo-icon"></span>
+      Miu도넛
+    </a>
+    <button class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
+    <nav>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="brand.html">브랜드</a></li>
+        <li><a href="menu.html">메뉴</a></li>
+        <li><a href="stores.html" class="active">매장안내</a></li>
+        <li><a href="franchise.html" class="cta-btn">가맹문의</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="section-tag" style="background: #C8E6C9; color: #2E7D32;">STORES</span>
+    <h1>전국 매장 안내</h1>
+    <p>전국 120여 개 매장에서 Miu도넛을 만나보세요</p>
+  </div>
+</section>
+
+<section class="search-section">
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="🔍 매장명 또는 주소를 입력하세요" oninput="searchStores(this.value)">
+    <select class="region-filter" onchange="filterRegion(this.value)">
+      <option value="all">전체 지역</option>
+      <option value="seoul">서울</option>
+      <option value="gyeonggi">경기/인천</option>
+      <option value="busan">부산/경남</option>
+      <option value="daegu">대구/경북</option>
+      <option value="other">기타 지역</option>
+    </select>
+  </div>
+</section>
+
+<section class="stores-section">
+  <div class="container">
+    <div class="stores-grid" id="storesGrid">
+
+      <div class="store-card" data-region="seoul" data-name="강남점">
+        <div class="store-img img-c1">강남점</div>
+        <div class="store-info">
+          <h3>Miu도넛 강남점 <span class="store-tag">대표매장</span></h3>
+          <div class="store-info-row"><strong>📍 주소</strong><span>서울시 강남구 강남대로 123</span></div>
+          <div class="store-info-row"><strong>🕐 영업</strong><span>매일 09:00 - 22:00</span></div>
+          <div class="store-info-row"><strong>📞 전화</strong><span>02-1234-5678</span></div>
+        </div>
+      </div>
+
+      <div class="store-card" data-region="seoul" data-name="홍대점">
+        <div class="store-img img-c2">홍대점</div>
+        <div class="store-info">
+          <h3>Miu도넛 홍대점</h3>
+          <div class="store-info-row"><strong>📍 주소</strong><span>서울시 마포구 양화로 88</span></div>
+          <div class="store-info-row"><strong>🕐 영업</strong><span>매일 10:00 - 23:00</span></div>
+          <div class="store-info-row"><strong>📞 전화</strong><span>02-2345-6789</span></div>
+        </div>
+      </div>
+
+      <div class="store-card" data-region="seoul" data-name="성수점">
+        <div class="store-img img-c3">성수점</div>
+        <div class="store-info">
+          <h3>Miu도넛 성수점 <span class="store-tag new">NEW</span></h3>
+          <div class="store-info-row"><strong>📍 주소</strong><span>서울시 성동구 성수이로 45</span></div>
+          <div class="store-info-row"><strong>🕐 영업</strong><span>매일 09:30 - 22:00</span></div>
+          <div class="store-info-row"><strong>📞 전화</strong><span>02-3456-7890</span></div>
+        </div>
+      </div>
+
+      <div class="store-card" data-region="seoul" data-name="잠실점">
+        <div class="store-img img-c4">잠실점</div>
+        <div class="store-info">
+          <h3>Miu도넛 잠실점</h3>
+          <div class="store-info-row"><strong>📍 주소</strong><span>서울시 송파구 올림픽로 240</span></div>
+          <div class="store-info-row"><strong>🕐 영업</strong><span>매일 10:00 - 22:00</span></div>
+          <div class="store-info-row"><strong>📞 전화</strong><span>02-4567-8901</span></div>
+        </div>
+      </div>
+
+      <div class="store-card" data-region="seoul" data-name="여의도점">
+        <div class="store-img img-c5">여의도점</div>
+        <div class="store-info">
+          <h3>Miu도넛 여의도점</h3>
+          <div class="store-info-row"><strong>📍 주소</strong><span>서울시 영등포구 여의대로 38</span></div>
+          <div class="store-info-row"><strong>🕐 영업</strong><span>평일 08:00 - 21:00</span></div>
+          <div class="store-info-row"><strong>📞 전화</strong><span>02-5678-9012</span></div>
+        </div>
+      </div>
+
+      <div class="store-card" data-region="gyeonggi" data-name="판교점">
+        <div class="store-img img-c6">판교점</div>
+        <div class="store-info">
+          <h3>Miu도넛 판교점 <span class="store-tag new">NEW</span></h3>
+          <div class="store-info-row"><strong>📍 주소</strong><span>경기도 성남시 분당구 판교로 235</span></div>
+          <div class="store-info-row"><strong>🕐 영업</strong><span>매일 09:00 - 22:00</span></div>
+          <div class="store-info-row"><strong>📞 전화</strong><span>031-1234-5678</span></div>
+        </div>
+      </div>
+
+      <div class="store-card" data-region="gyeonggi" data-name="송도점">
+        <div class="store-img img-c7">송도점</div>
+        <div class="store-info">
+          <h3>Miu도넛 송도점</h3>
+          <div class="store-info-row"><strong>📍 주소</strong><span>인천시 연수구 송도과학로 32</span></div>
+          <div class="store-info-row"><strong>🕐 영업</strong><span>매일 10:00 - 22:00</span></div>
+          <div class="store-info-row"><strong>📞 전화</strong><span>032-1234-5678</span></div>
+        </div>
+      </div>
+
+      <div class="store-card" data-region="busan" data-name="해운대점">
+        <div class="store-img img-c8">해운대점</div>
+        <div class="store-info">
+          <h3>Miu도넛 해운대점</h3>
+          <div class="store-info-row"><strong>📍 주소</strong><span>부산시 해운대구 해운대로 570</span></div>
+          <div class="store-info-row"><strong>🕐 영업</strong><span>매일 09:00 - 23:00</span></div>
+          <div class="store-info-row"><strong>📞 전화</strong><span>051-1234-5678</span></div>
+        </div>
+      </div>
+
+      <div class="store-card" data-region="daegu" data-name="대구동성로점">
+        <div class="store-img img-c9">동성로점</div>
+        <div class="store-info">
+          <h3>Miu도넛 대구동성로점</h3>
+          <div class="store-info-row"><strong>📍 주소</strong><span>대구시 중구 동성로 65</span></div>
+          <div class="store-info-row"><strong>🕐 영업</strong><span>매일 10:00 - 22:00</span></div>
+          <div class="store-info-row"><strong>📞 전화</strong><span>053-1234-5678</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="map-cta">
+  <div class="container">
+    <h3>가까운 매장을 찾고 계신가요?</h3>
+    <p>Miu도넛 고객센터에서 친절히 안내해드립니다</p>
+    <a href="tel:1588-0000" class="btn btn-primary">📞 1588-0000</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h3>Miu도넛</h3>
+      <p>매일 만들어 더 신선하게,<br>달콤한 행복을 한 입에 전합니다.</p>
+      <div class="social-icons">
+        <a href="#">IG</a>
+        <a href="#">FB</a>
+        <a href="#">YT</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="brand.html">브랜드 소개</a></li>
+        <li><a href="menu.html">메뉴</a></li>
+        <li><a href="stores.html">매장 안내</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>창업안내</h4>
+      <ul>
+        <li><a href="franchise.html">가맹 절차</a></li>
+        <li><a href="franchise.html">창업 비용</a></li>
+        <li><a href="franchise.html">개설 문의</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>고객센터</h4>
+      <ul>
+        <li>1588-0000</li>
+        <li>평일 09:00 - 18:00</li>
+        <li>contact@miudonut.kr</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Miu도넛 Co., Ltd. All Rights Reserved.
+  </div>
+</footer>
+
+<script>
+function searchStores(query) {
+  const cards = document.querySelectorAll('.store-card');
+  cards.forEach(card => {
+    const name = ca

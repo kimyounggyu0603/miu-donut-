@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>브랜드 소개 - Miu도넛</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, var(--pink-light) 0%, var(--cream) 100%);
+    padding: 100px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero h1 {
+    font-family: 'Jua', sans-serif;
+    font-size: 64px;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .page-hero p {
+    font-size: 20px;
+    color: #555;
+  }
+  .deco-donut {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.4;
+    z-index: 1;
+  }
+  .deco-donut::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--cream);
+    border-radius: 50%;
+  }
+  .deco-1 {
+    width: 180px; height: 180px;
+    background: radial-gradient(circle at 30% 30%, #FFC0D9, var(--pink));
+    top: -40px; right: -40px;
+  }
+  .deco-1::before { width: 60px; height: 60px; }
+  .deco-2 {
+    width: 120px; height: 120px;
+    background: radial-gradient(circle at 30% 30%, #FFEC8B, var(--yellow));
+    bottom: -30px; left: -30px;
+  }
+  .deco-2::before { width: 40px; height: 40px; }
+
+  /* PHILOSOPHY */
+  .philosophy {
+    background: white;
+  }
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 50px;
+  }
+  .philosophy-card {
+    text-align: center;
+    padding: 40px 24px;
+    background: var(--cream);
+    border-radius: 24px;
+    transition: all 0.3s;
+  }
+  .philosophy-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow);
+  }
+  .philosophy-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Jua', sans-serif;
+    font-size: 42px;
+    color: white;
+  }
+  .icon-1 { background: var(--pink); }
+  .icon-2 { background: var(--yellow); color: var(--dark); }
+  .icon-3 { background: var(--mint); }
+  .philosophy-card h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  .philosophy-card p {
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* STORY DETAIL */
+  .story-detail {
+    background: var(--cream);
+  }
+  .story-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+  .story-block:last-child {
+    margin-bottom: 0;
+  }
+  .story-block.reverse {
+    direction: rtl;
+  }
+  .story-block.reverse > * {
+    direction: ltr;
+  }
+  .story-block-text h3 {
+    font-family: 'Jua', sans-serif;
+    font-size: 40px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--dark);
+  }
+  .story-block-text .year {
+    display: inline-block;
+    background: var(--pink);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .story-block-text p {
+    font-size: 17px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .story-block-img {
+    height: 360px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Jua', sans-serif;
+    font-size: 42px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+  .img-1 { background-image: url('images/store-hongdae.jpg'), linear-gradient(135deg, var(--pink), var(--orange)); background-size: cover; background-position: center; color: transparent; }
+  .img-2 { background-image: url('images/hero-plate.jpg'), linear-gradient(135deg, var(--mint), var(--sky)); background-size: cover; background-position: center; color: transparent; }
+  .img-3 { background-image: url('images/store-haeundae.jpg'), linear-gradient(135deg, var(--yellow), var(--pink)); background-size: cover; background-position: center; color: transparent; }
+
+  /* VISION */
+  .vision {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--orange) 100%);
+    color: white;
+    text-align: center;
+  }
+  .vision h2 {
+    font-family: 'Jua', sans-serif;
+    font-size: 56px;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+  .vision p {
+    font-size: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.8;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 768px) {
+    .page-hero h1 { font-size: 42px; }
+    .philosophy-grid { grid-template-columns: 1fr; }
+    .story-block { grid-template-columns: 1fr; gap: 30px; }
+    .story-block.reverse { direction: ltr; }
+    .story-block-text h3 { font-size: 30px; }
+    .vision h2 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <span class="logo-icon"></span>
+      Miu도넛
+    </a>
+    <button class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
+    <nav>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="brand.html" class="active">브랜드</a></li>
+        <li><a href="menu.html">메뉴</a></li>
+        <li><a href="stores.html">매장안내</a></li>
+        <li><a href="franchise.html" class="cta-btn">가맹문의</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="deco-donut deco-1"></div>
+  <div class="deco-donut deco-2"></div>
+  <div class="container" style="position: relative; z-index: 2;">
+    <span class="section-tag">BRAND STORY</span>
+    <h1>달콤한 행복을<br>만드는 사람들</h1>
+    <p>2018년, 작은 빵집에서 시작된 Miu도넛의 이야기</p>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="container">
+    <h2 class="section-title">우리가 지키는 약속</h2>
+    <p class="section-subtitle">Miu도넛만의 세 가지 철학</p>
+    <div class="philosophy-grid">
+      <div class="philosophy-card">
+        <div class="philosophy-icon icon-1">신선</div>
+        <h3>매일 신선하게</h3>
+        <p>매장에서 매일 직접 반죽하고 튀겨 가장 신선한 도넛만을 제공합니다. 어제 만든 도넛은 절대 판매하지 않습니다.</p>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-icon icon-2">정직</div>
+        <h3>정직한 재료</h3>
+        <p>인공 첨가물을 최소화하고, 100% 국내산 우유와 엄선된 프리미엄 재료만을 사용합니다.</p>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-icon icon-3">행복</div>
+        <h3>모두의 행복</h3>
+        <p>도넛 한 입이 누군가의 하루를 바꿀 수 있다는 믿음으로, 매일 정성을 담아 굽습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY DETAIL -->
+<section class="story-detail">
+  <div class="container">
+    <h2 class="section-title">우리의 발자취</h2>
+    <p class="section-subtitle">Miu도넛이 걸어온 길</p>
+
+    <div style="margin-top: 60px;">
+
+      <div class="story-block">
+        <div class="story-block-text">
+          <span class="year">2018</span>
+          <h3>작은 빵집에서<br>시작된 꿈</h3>
+          <p>한 평짜리 작은 공간에서 시작했습니다. "정말 맛있는 도넛을 만들자"는 단순한 마음으로 매일 새벽 반죽을 시작했고, 입소문을 타고 동네에서 유명한 빵집이 되었습니다.</p>
+        </div>
+        <div class="story-block-img img-1">First Store</div>
+      </div>
+
+      <div class="story-block reverse">
+        <div class="story-block-text">
+          <span class="year" style="background: var(--mint);">2021</span>
+          <h3>전국으로 퍼진<br>달콤한 향기</h3>
+          <p>전국 30개 매장 돌파. 작은 동네 빵집에서 시작한 Miu도넛은 지역 곳곳으로 퍼져나가, 더 많은 사람들에게 달콤한 행복을 전하기 시작했습니다.</p>
+        </div>
+        <div class="story-block-img img-2">30 Stores</div>
+      </div>
+
+      <div class="story-block">
+        <div class="story-block-text">
+          <span class="year" style="background: var(--orange);">2026</span>
+          <h3>이제는 모두의<br>Miu도넛</h3>
+          <p>120개 이상의 매장과 함께, Miu도넛은 더 많은 사람들의 일상에 작은 행복을 더하고 있습니다. 앞으로도 변함없는 정성과 품질로 함께하겠습니다.</p>
+        </div>
+        <div class="story-block-img img-3">120+ Stores</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="vision">
+  <div class="container">
+    <span class="section-tag" style="background: rgba(255,255,255,0.2); color: white;">VISION</span>
+    <h2>"Make Every Day Sweeter"</h2>
+    <p>Miu도넛은 단순히 도넛을 파는 곳이 아닙니다. 우리는 누군가의 평범한 하루를 조금 더 달콤하게 만들고, 잠깐의 휴식 속에서 작은 행복을 발견할 수 있는 공간을 만들어갑니다.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h3>Miu도넛</h3>
+      <p>매일 만들어 더 신선하게,<br>달콤한 행복을 한 입에 전합니다.</p>
+      <div class="social-icons">
+        <a href="#">IG</a>
+        <a href="#">FB</a>
+        <a href="#">YT</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="brand.html">브랜드 소개</a></li>
+        <li><a href="menu.html">메뉴</a></li>
+        <li><a href="stores.html">매장 안내</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>창업안내</h4>
+      <ul>
+        <li><a href="franchise.html">가맹 절차</a></li>
+        <li><a href="franchise.html">창업 비용</a></li>
+        <li><a href="franchise.html">개설 문의</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>고객센터</h4>
+      <ul>
+        <li>1588-0000</li>
+        <li>평일 09:00 - 18:00</li>
+        <li>contact@miudonut.kr</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Miu도넛 Co., Ltd. All Rights Reserved.
+  </div>
+</footer>
+
+</body>
+</html>

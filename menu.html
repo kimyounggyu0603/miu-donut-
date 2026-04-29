@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메뉴 - Miu도넛</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .page-hero {
+    background:
+      linear-gradient(135deg, rgba(255, 236, 139, 0.85) 0%, rgba(255, 248, 240, 0.92) 100%),
+      url('images/hero-plate.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 24px 80px;
+    text-align: center;
+    position: relative;
+  }
+  .page-hero h1 {
+    font-family: 'Jua', sans-serif;
+    font-size: 64px;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .page-hero p {
+    font-size: 20px;
+    color: #555;
+  }
+
+  /* CATEGORY TABS */
+  .category-tabs {
+    background: white;
+    padding: 30px 24px;
+    border-bottom: 2px solid var(--light-gray);
+    position: sticky;
+    top: 216px;
+    z-index: 100;
+  }
+  .tab-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 12px 28px;
+    border-radius: 30px;
+    background: var(--light-gray);
+    border: none;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover {
+    background: var(--pink-light);
+    color: var(--pink);
+  }
+  .tab-btn.active {
+    background: var(--pink);
+    color: white;
+  }
+
+  /* MENU GRID */
+  .menu-section {
+    background: var(--cream);
+    padding: 60px 24px;
+  }
+  .menu-category {
+    margin-bottom: 80px;
+  }
+  .category-title {
+    font-family: 'Jua', sans-serif;
+    font-size: 40px;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+  .category-desc {
+    color: var(--gray);
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .menu-item {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+  .menu-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow);
+  }
+  .menu-img-wrap {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .donut-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    background-size: cover;
+    background-position: center;
+  }
+  .menu-info {
+    padding: 20px;
+  }
+  .menu-info h4 {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .menu-info .desc {
+    color: var(--gray);
+    font-size: 13px;
+    margin-bottom: 12px;
+    height: 36px;
+    overflow: hidden;
+  }
+  .menu-info .price {
+    color: var(--pink);
+    font-weight: 900;
+    font-size: 18px;
+  }
+  .badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--pink);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    z-index: 2;
+  }
+  .badge.new { background: var(--mint); }
+  .badge.hot { background: var(--orange); }
+  .badge.signature { background: var(--sky); }
+
+  /* Donut images with gradient fallback */
+  .d-strawberry { background-image: url('images/donut-strawberry.jpg'), radial-gradient(circle at 30% 30%, #FFC0D9, var(--pink)); }
+  .d-lemon { background-image: url('images/donut-lemon.jpg'), radial-gradient(circle at 30% 30%, #FFEC8B, var(--yellow)); }
+  .d-choco { background-image: url('images/donut-choco.jpg'), radial-gradient(circle at 30% 30%, #C2B280, #6B4423); }
+  .d-pistachio { background-image: url('images/donut-raspberry.jpg'), radial-gradient(circle at 30% 30%, #B5EAD7, var(--mint)); }
+  .d-blueberry { background-image: url('images/donut-blueberry.jpg'), radial-gradient(circle at 30% 30%, #C5CAE9, var(--sky)); }
+  .d-orange { background-image: url('images/donut-caramel.jpg'), radial-gradient(circle at 30% 30%, #FFD180, var(--orange)); }
+  .d-vanilla { background-image: url('images/donut-cream.jpg'), radial-gradient(circle at 30% 30%, #FFF8E1, #F4E4BC); }
+  .d-matcha { background-image: url('images/donut-matcha.jpg'), radial-gradient(circle at 30% 30%, #C5E1A5, #689F38); }
+  .d-grape { background-image: url('images/donut-blueberry.jpg'), radial-gradient(circle at 30% 30%, #D1C4E9, #7B1FA2); }
+  .d-mango { background-image: url('images/donut-lemon.jpg'), radial-gradient(circle at 30% 30%, #FFE082, #FB8C00); }
+  .d-mint { background-image: url('images/donut-matcha.jpg'), radial-gradient(circle at 30% 30%, #B2DFDB, #00897B); }
+  .d-redvelvet { background-image: url('images/donut-cookie.jpg'), radial-gradient(circle at 30% 30%, #FFCDD2, #B71C1C); }
+  .d-cookie { background-image: url('images/donut-cookie.jpg'), radial-gradient(circle at 30% 30%, #FFF8E1, #6B4423); }
+  .d-raspberry { background-image: url('images/donut-raspberry.jpg'), radial-gradient(circle at 30% 30%, #FFCDD2, #C62828); }
+  .d-caramel { background-image: url('images/donut-caramel.jpg'), radial-gradient(circle at 30% 30%, #FFD180, #E65100); }
+  .d-cream { background-image: url('images/donut-cream.jpg'), radial-gradient(circle at 30% 30%, #FFF8E1, #BCAAA4); }
+
+  @media (max-width: 768px) {
+    .page-hero h1 { font-size: 42px; }
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    .category-title { font-size: 30px; }
+    .category-tabs { top: 134px; padding: 20px 12px; }
+    .tab-btn { padding: 10px 18px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <span class="logo-icon"></span>
+      Miu도넛
+    </a>
+    <button class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('open')">☰</button>
+    <nav>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="brand.html">브랜드</a></li>
+        <li><a href="menu.html" class="active">메뉴</a></li>
+        <li><a href="stores.html">매장안내</a></li>
+        <li><a href="franchise.html" class="cta-btn">가맹문의</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="section-tag">MENU</span>
+    <h1>달콤함을 한 입에</h1>
+    <p>Miu도넛의 시그니처 메뉴를 만나보세요</p>
+  </div>
+</section>
+
+<div class="category-tabs">
+  <div class="tab-container">
+    <button class="tab-btn active" onclick="filterMenu('all', this)">전체</button>
+    <button class="tab-btn" onclick="filterMenu('signature', this)">시그니처</button>
+    <button class="tab-btn" onclick="filterMenu('classic', this)">클래식</button>
+    <button class="tab-btn" onclick="filterMenu('seasonal', this)">시즌 한정</button>
+  </div>
+</div>
+
+<section class="menu-section">
+  <div class="container">
+
+    <!-- SIGNATURE -->
+    <div class="menu-category" data-category="signature">
+      <h2 class="category-title">SIGNATURE 시그니처</h2>
+      <p class="category-desc">Miu도넛만의 특별한 시그니처 메뉴</p>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <span class="badge signature">SIGNATURE</span>
+          <div class="menu-img-wrap"><div class="donut-img d-strawberry"></div></div>
+          <div class="menu-info">
+            <h4>스트로베리 글레이즈</h4>
+            <p class="desc">달콤한 딸기 글레이즈에 부드러운 도넛</p>
+            <div class="price">3,800원</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <span class="badge signature">SIGNATURE</span>
+          <div class="menu-img-wrap"><div class="donut-img d-raspberry"></div></div>
+          <div class="menu-info">
+            <h4>라즈베리 피스타치오</h4>
+            <p class="desc">달콤한 라즈베리와 고소한 피스타치오</p>
+            <div class="price">4,500원</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <span class="badge signature">SIGNATURE</span>
+          <div class="menu-img-wrap"><div class="donut-img d-cookie"></div></div>
+          <div class="menu-info">
+            <h4>쿠키 앤 크림</h4>
+            <p class="desc">화이트 크림 위에 오레오 쿠키 가득</p>
+            <div class="price">4,200원</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <span class="badge signature">SIGNATURE</span>
+          <div class="menu-img-wrap"><div class="donut-img d-matcha"></div></div>
+          <div class="menu-info">
+            <h4>말차 글레이즈</h4>
+            <p class="desc">우지말차의 깊은 풍미</p>
+            <div class="price">4,300원</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLASSIC -->
+    <div class="menu-category" data-category="classic">
+      <h2 class="category-title">CLASSIC 클래식</h2>
+      <p class="category-desc">언제나 사랑받는 기본 메뉴</p>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-img-wrap"><div class="donut-img d-cream"></div></div>
+          <div class="menu-info">
+            <h4>슈가 크림 봄볼로니</h4>
+            <p class="desc">슈가파우더 + 부드러운 크림 충전</p>
+            <div class="price">3,500원</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-img-wrap"><div class="donut-img d-choco"></div></div>
+          <div class="menu-info">
+            <h4>초코 글레이즈</h4>
+            <p class="desc">진한 초콜릿 글레이즈</p>
+            <div class="price">3,200원</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-img-wrap"><div class="donut-img d-lemon"></div></div>
+          <div class="menu-info">
+            <h4>레몬 슈가</h4>
+            <p class="desc">상큼한 레몬 슈가</p>
+            <div class="price">3,500원</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-img-wrap"><div class="donut-img d-blueberry"></div></div>
+          <div class="menu-info">
+            <h4>블루베리 잼</h4>
+            <p class="desc">달콤한 블루베리 잼이 가득</p>
+            <div class="price">3,800원</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEASONAL -->
+    <div class="menu-category" data-category="seasonal">
+      <h2 class="category-title">SEASONAL 시즌 한정</h2>
+      <p class="category-desc">지금 이 계절에만 만날 수 있는 특별한 맛</p>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <span class="badge hot">HOT</span>
+          <div class="menu-img-wrap"><div class="donut-img d-caramel"></div></div>
+          <div class="menu-info">
+            <h4>카라멜 헤이즐넛</h4>
+            <p class="desc">진한 카라멜과 고소한 헤이즐넛</p>
+            <div class="price">4,800원</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <span class="badge new">NEW</span>
+          <div class="menu-img-wrap"><div class="donut-img d-blueberry"></div></div>
+          <div class="menu-info">
+            <h4>와일드 베리</h4>
+            <p class="desc">진한 베리류 과실의 풍미</p>
+            <div class="price">4,300원</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <span class="badge new">NEW</span>
+          <div class="menu-img-wrap"><div class="donut-img d-strawberry"></div></div>
+          <div class="menu-info">
+            <h4>핑크 글레이즈</h4>
+            <p class="desc">달콤한 핑크 글레이즈에 화이트 토핑</p>
+            <div class="price">3,900원</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <span class="badge hot">HOT</span>
+          <div class="menu-img-wrap"><div class="donut-img d-lemon"></div></div>
+          <div class="menu-info">
+            <h4>썬샤인 레몬</h4>
+            <p class="desc">상큼한 레몬 글레이즈의 풍미</p>
+            <div class="price">3,800원</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h3>Miu도넛</h3>
+      <p>매일 만들어 더 신선하게,<br>달콤한 행복을 한 입에 전합니다.</p>
+      <div class="social-icons">
+        <a href="#">IG</a>
+        <a href="#">FB</a>
+        <a href="#">YT</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>바로가기</h4>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="brand.html">브랜드 소개</a></li>
+        <li><a href="menu.html">메뉴</a></li>
+        <li><a href="stores.html">매장 안내</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>창업안내</h4>
+      <ul>
+        <li><a href="franchise.html">가맹 절차</a></li>
+        <li><a href="franchise.html">창업 비용</a></li>
+        <li><a href="franchise.html">개설 문의</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>고객센터</h4>
+      <ul>
+        <li>1588-0000</li>
+        <li>평일 09:00 - 18:00</li>
+        <li>contact@miudonut.kr</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Miu도넛 Co., Ltd. All Rights Reserved.
+  </div>
+</footer>
+
+<script>
+function filterMenu(category, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.menu-category').forEach(c => {
+    if (category === 'all' || c.dataset.category === category) {
+      c.style.display = 'block';
+    } else {
+      c.style.display = 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
