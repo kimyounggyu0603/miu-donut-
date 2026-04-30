@@ -172,12 +172,23 @@
   }
 
   @media (max-width: 768px) {
-    .page-hero h1 { font-size: 42px; }
-    .philosophy-grid { grid-template-columns: 1fr; }
-    .story-block { grid-template-columns: 1fr; gap: 30px; }
+    .page-hero { padding: 50px 16px 40px; }
+    .page-hero h1 { font-size: 36px; line-height: 1.2; }
+    .page-hero p { font-size: 15px; }
+    .philosophy { padding: 50px 16px; }
+    .philosophy-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 36px; }
+    .philosophy-card { padding: 30px 20px; }
+    .philosophy-icon { width: 80px; height: 80px; font-size: 32px; }
+    .philosophy-card h3 { font-size: 20px; }
+    .story-detail { padding: 50px 16px; }
+    .story-block { grid-template-columns: 1fr; gap: 24px; margin-bottom: 50px; }
     .story-block.reverse { direction: ltr; }
-    .story-block-text h3 { font-size: 30px; }
-    .vision h2 { font-size: 36px; }
+    .story-block-text h3 { font-size: 26px; }
+    .story-block-text p { font-size: 15px; }
+    .story-block-img { height: 240px; font-size: 32px; }
+    .vision { padding: 50px 16px; }
+    .vision h2 { font-size: 30px; }
+    .vision p { font-size: 16px; }
   }
 </style>
 </head>
@@ -295,9 +306,9 @@
       <h3>Miu도넛</h3>
       <p>매일 만들어 더 신선하게,<br>달콤한 행복을 한 입에 전합니다.</p>
       <div class="social-icons">
-        <a href="#">IG</a>
-        <a href="#">FB</a>
-        <a href="#">YT</a>
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="YouTube">YT</a>
       </div>
     </div>
     <div class="footer-col">

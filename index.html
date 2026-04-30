@@ -280,16 +280,32 @@
   }
 
   @media (max-width: 768px) {
-    .hero-container { grid-template-columns: 1fr; }
-    .hero-text h1 { font-size: 48px; }
-    .hero-visual { height: 300px; }
-    .menu-grid { grid-template-columns: repeat(2, 1fr); }
-    .story-grid { grid-template-columns: 1fr; }
-    .story-text h2 { font-size: 40px; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .stat-num { font-size: 48px; }
+    .hero { padding: 50px 16px 60px; }
+    .hero-container { grid-template-columns: 1fr; gap: 30px; }
+    .hero-text h1 { font-size: 38px; }
+    .hero-text p { font-size: 16px; }
+    .hero-visual { height: 280px; }
+    .hero-img { max-width: 320px; height: 280px; border-radius: 24px; }
+    .hero-buttons { justify-content: center; }
+    .hero-text { text-align: center; }
+    .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .menu-card { padding: 16px; }
+    .menu-card-img { width: 110px; height: 110px; }
+    .menu-card h3 { font-size: 16px; }
+    .menu-card p { font-size: 12px; }
+    .story { padding: 50px 16px; }
+    .story-grid { grid-template-columns: 1fr; gap: 30px; }
+    .story-img { width: 100%; max-width: 320px; height: 320px; margin: 0 auto; }
+    .story-text { text-align: center; }
+    .story-text h2 { font-size: 32px; }
+    .story-text p { font-size: 15px; }
+    .stats { padding: 40px 16px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .stat-num { font-size: 40px; }
+    .stat-label { font-size: 13px; }
     .stores-grid { grid-template-columns: 1fr; }
-    .cta-section h2 { font-size: 36px; }
+    .cta-section h2 { font-size: 30px; }
+    .cta-section p { font-size: 16px; }
   }
 </style>
 </head>
@@ -506,4 +522,9 @@
     </div>
   </div>
   <div class="footer-bottom">
-    © 2026 Miu도넛 Co., Ltd. All Rights Reserved
+    © 2026 Miu도넛 Co., Ltd. All Rights Reserved.
+  </div>
+</footer>
+
+</body>
+</html>

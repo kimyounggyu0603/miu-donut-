@@ -331,12 +331,34 @@
   .agree input { width: auto; }
 
   @media (max-width: 768px) {
-    .page-hero h1 { font-size: 42px; }
-    .why-grid { grid-template-columns: repeat(2, 1fr); }
-    .process-grid { grid-template-columns: repeat(2, 1fr); }
-    .cost-table-wrap { padding: 20px; }
-    .form-wrap { padding: 30px 20px; }
-    .form-row { grid-template-columns: 1fr; }
+    .page-hero { padding: 50px 16px 40px; }
+    .page-hero h1 { font-size: 38px; line-height: 1.2; }
+    .page-hero p { font-size: 16px; }
+    .why { padding: 50px 16px; }
+    .why-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 36px; }
+    .why-card { padding: 24px 16px; }
+    .why-num { font-size: 44px; }
+    .why-card h3 { font-size: 16px; }
+    .why-card p { font-size: 13px; }
+    .process { padding: 50px 16px; }
+    .process-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .process-step { padding: 20px 12px; }
+    .step-num { width: 40px; height: 40px; font-size: 20px; margin-bottom: 12px; }
+    .process-step h4 { font-size: 14px; }
+    .process-step p { font-size: 12px; }
+    .cost { padding: 50px 16px; }
+    .cost-table-wrap { padding: 16px; }
+    .cost-table th, .cost-table td { padding: 12px 8px; font-size: 13px; }
+    .faq { padding: 50px 16px; }
+    .faq-q { padding: 18px; font-size: 15px; }
+    .faq-q::before { width: 28px; height: 28px; font-size: 14px; margin-right: 12px; }
+    .faq-item.open .faq-a { padding: 0 18px 18px 60px; max-height: 300px; font-size: 14px; }
+    .contact { padding: 50px 16px; }
+    .form-wrap { padding: 24px 16px; margin-top: 36px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .form-group input, .form-group select, .form-group textarea { padding: 12px 14px; font-size: 14px; }
+    .form-submit { font-size: 15px; padding: 14px; }
+    .agree { font-size: 12px; }
   }
 </style>
 </head>
@@ -591,9 +613,9 @@
       <h3>Miu도넛</h3>
       <p>매일 만들어 더 신선하게,<br>달콤한 행복을 한 입에 전합니다.</p>
       <div class="social-icons">
-        <a href="#">IG</a>
-        <a href="#">FB</a>
-        <a href="#">YT</a>
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="YouTube">YT</a>
       </div>
     </div>
     <div class="footer-col">
@@ -622,4 +644,10 @@
       </ul>
     </div>
   </div>
-  <div clas
+  <div class="footer-bottom">
+    © 2026 Miu도넛 Co., Ltd. All Rights Reserved.
+  </div>
+</footer>
+
+</body>
+</html>

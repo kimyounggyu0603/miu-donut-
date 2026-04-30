@@ -157,9 +157,21 @@
   }
 
   @media (max-width: 768px) {
-    .page-hero h1 { font-size: 42px; }
-    .stores-grid { grid-template-columns: 1fr; }
-    .search-container { flex-direction: column; }
+    .page-hero { padding: 50px 16px 40px; }
+    .page-hero h1 { font-size: 36px; }
+    .page-hero p { font-size: 15px; }
+    .search-section { padding: 16px; }
+    .search-container { flex-direction: column; gap: 8px; }
+    .search-input, .region-filter { font-size: 14px; padding: 12px 16px; }
+    .stores-section { padding: 40px 16px; }
+    .stores-grid { grid-template-columns: 1fr; gap: 16px; }
+    .store-img { height: 180px; font-size: 24px; }
+    .store-info { padding: 20px; }
+    .store-info h3 { font-size: 18px; flex-wrap: wrap; }
+    .store-info-row { font-size: 13px; }
+    .map-cta { padding: 40px 16px; }
+    .map-cta h3 { font-size: 26px; }
+    .map-cta p { font-size: 14px; }
   }
 </style>
 </head>
@@ -322,9 +334,9 @@
       <h3>Miu도넛</h3>
       <p>매일 만들어 더 신선하게,<br>달콤한 행복을 한 입에 전합니다.</p>
       <div class="social-icons">
-        <a href="#">IG</a>
-        <a href="#">FB</a>
-        <a href="#">YT</a>
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="YouTube">YT</a>
       </div>
     </div>
     <div class="footer-col">
@@ -362,4 +374,25 @@
 function searchStores(query) {
   const cards = document.querySelectorAll('.store-card');
   cards.forEach(card => {
-    const name = ca
+    const text = card.textContent.toLowerCase();
+    if (text.includes(query.toLowerCase())) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+function filterRegion(region) {
+  const cards = document.querySelectorAll('.store-card');
+  cards.forEach(card => {
+    if (region === 'all' || card.dataset.region === region) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>
